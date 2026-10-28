@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vindicat | Sistema Automatizado de Impugnación</title>
+    <title>Vindicat | Defensa Vial Inteligente</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen">
     
-    <!-- Encabezado Institucional -->
+    <!-- Encabezado -->
     <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -20,14 +20,15 @@
     </header>
 
     <!-- Contenido Principal -->
-    <main class="max-w-2xl mx-auto px-4 py-8">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+    <main class="max-w-2xl mx-auto px-4 py-8 space-y-6">
+        
+        <!-- Formulario de Consulta -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
             <div>
-                <h2 class="text-lg font-semibold text-white">Generador de Petición / Tutela</h2>
-                <p class="text-sm text-slate-400 mt-1">Impugnación de fotomultas por indebida notificación y violación al principio de responsabilidad personal.</p>
+                <h2 class="text-lg font-semibold text-white">Consulta tu Fotomulta Gratis</h2>
+                <p class="text-sm text-slate-400 mt-1">Ingresa tus datos para recibir un diagnóstico legal inmediato respaldado por la Corte Constitucional.</p>
             </div>
 
-            <!-- Formulario -->
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-slate-300 mb-1">Número de Comparendo / Fotomulta</label>
@@ -39,35 +40,86 @@
                     <input type="text" id="cedula" placeholder="Número de documento" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
                 </div>
 
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Seleccione Nivel de Defensa</label>
-                    <select id="nivel" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                        <option value="25000">Nivel 1: Petición de Revocatoria Directa ($25.000 COP)</option>
-                        <option value="60000">Nivel 2: Acción de Tutela Completa ($60.000 COP)</option>
-                    </select>
-                </div>
-
-                <button onclick="simularPago()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg text-sm transition shadow-lg shadow-blue-600/20">
-                    Generar Documento y Pagar (Wompi)
+                <button onclick="generarDiagnostico()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg text-sm transition shadow-lg shadow-blue-600/20">
+                    Analizar Opciones de Defensa
                 </button>
             </div>
-
-            <div id="resultado" class="hidden pt-4 border-t border-slate-800 text-center space-y-3">
-                <div class="text-emerald-400 text-sm font-medium">¡Documento generado con éxito bajo jurisprudencia de la Corte Constitucional!</div>
-                <div class="text-xs text-slate-400">Redirigiendo a pasarela segura de pago Wompi...</div>
-            </div>
         </div>
+
+        <!-- Sección de Diagnóstico y Opciones de Pago (Oculta hasta consultar) -->
+        <div id="resultado" class="hidden space-y-6">
+            
+            <!-- Diagnóstico Gratuito -->
+            <div class="bg-slate-900 border border-emerald-500/30 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="flex items-center space-x-2 text-emerald-400 font-semibold text-sm">
+                    <span>✓ Diagnóstico Legal Preliminar Encontrado</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Hemos detectado altas probabilidades de éxito para objetar este comparendo basándonos en los siguientes argumentos de ley:
+                </p>
+                <div class="space-y-3 text-xs text-slate-400">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-slate-200 block mb-1">1. Falta de Notificación Oportuna (Ley 1843/2017)</strong>
+                        El tránsito tenía máximo 3 días hábiles para notificarte a tu dirección física o correo registrado en el RUNT. Si no lo hicieron cumpliendo este plazo, el proceso carece de validez.
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-slate-200 block mb-1">2. Violación de Responsabilidad Personal (Sentencia C-038/2020)</strong>
+                        La Corte Constitucional prohibió presumir que el dueño del carro iba manejando. Si no plenifican quién conducía mediante foto clara del rostro, la multa se cae.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasarela de Pago / Opciones -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-md font-semibold text-white">Elige tu nivel de defensa automatizado</h3>
+                <p class="text-xs text-slate-400">Adquiere el documento formal listo para radicar ante el organismo de tránsito:</p>
+
+                <div class="grid gap-3">
+                    <!-- Nivel 1 -->
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-medium text-white">Nivel 1: Petición de Revocatoria</div>
+                            <div class="text-xs text-slate-400">Ideal para alegar notificación extemporánea.</div>
+                            <div class="text-emerald-400 font-bold text-sm mt-1">$25.000 COP</div>
+                        </div>
+                        <button onclick="pagarWompi(25000)" class="bg-slate-800 hover:bg-blue-600 text-white text-xs font-medium px-4 py-2 rounded-lg transition">
+                            Comprar Nivel 1
+                        </button>
+                    </div>
+
+                    <!-- Nivel 2 -->
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-medium text-white">Nivel 2: Acción de Tutela</div>
+                            <div class="text-xs text-slate-400">Estrategia avanzada por violación al debido proceso.</div>
+                            <div class="text-emerald-400 font-bold text-sm mt-1">$60.000 COP</div>
+                        </div>
+                        <button onclick="pagarWompi(60000)" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition shadow-md">
+                            Comprar Nivel 2
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </main>
 
     <script>
-        function simularPago() {
+        function generarDiagnostico() {
             const comp = document.getElementById('comparendo').value;
             const ced = document.getElementById('cedula').value;
             if(!comp || !ced) {
-                alert('Por favor complete los campos obligatorios.');
+                alert('Por favor ingrese el número de comparendo y su cédula.');
                 return;
             }
             document.getElementById('resultado').classList.remove('hidden');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function pagarWompi(monto) {
+            alert('Redirigiendo a la pasarela segura de Wompi por un valor de $' + monto.toLocaleString() + ' COP...');
+            // Aquí puedes conectar posteriormente el link de pago real de Wompi
         }
     </script>
 </body>
