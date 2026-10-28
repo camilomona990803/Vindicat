@@ -1,215 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vindicat | Inteligencia Jurídica Vial</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen">
-    
-    <!-- Encabezado -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span class="bg-blue-600 text-white font-bold px-3 py-1 rounded text-sm">VINDICAT</span>
-                <h1 class="text-xl font-bold tracking-tight">LegalTech IA & Defensa Vial</h1>
-            </div>
-            <span class="text-xs bg-blue-950 text-blue-400 px-2.5 py-1 rounded-full border border-blue-800">Ley 1843 / C-038 / CNT</span>
-        </div>
-    </header>
-
-    <!-- Contenido Principal -->
-    <main class="max-w-2xl mx-auto px-4 py-8 space-y-6">
-        
-        <!-- Módulo de Asesoría Virtual Inteligente -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-            <div>
-                <h2 class="text-lg font-semibold text-white">Asesoría Jurídica Virtual con Inteligencia Artificial</h2>
-                <p class="text-sm text-slate-400 mt-1">Ingrese los datos de su comparendo o multa y cuéntenos en detalle su caso. Nuestra IA jurídica analizará la legalidad y los vacíos normativos aplicables.</p>
-            </div>
-
-            <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Número de Comparendo / Multa</label>
-                        <input type="text" id="comparendo" placeholder="Ej: 6600100000..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Fecha de la Infracción</label>
-                        <input type="date" id="fechaInfraccion" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Cédula del Propietario / Involucrado</label>
-                    <input type="text" id="cedula" placeholder="Número de documento" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Relato Detallado de los Hechos (Asesoría IA)</label>
-                    <textarea id="relatoHechos" rows="4" placeholder="Ej: Me impusieron comparendo por tecnomecánica cuando la tenía vigente, o nunca me notificaron en los 3 días hábiles..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-
-                <button onclick="ejecutarAsesoriaIA()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-lg text-sm transition shadow-lg shadow-blue-600/20 cursor-pointer flex items-center justify-center space-x-2">
-                    <span>🤖 Ejecutar Análisis de IA Jurídica</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Resultados de la IA y Opciones de Trámite (Oculto inicialmente) -->
-        <div id="resultado" class="hidden space-y-6">
-            
-            <!-- Diagnóstico Jurídico Detallado -->
-            <div class="bg-slate-900 border border-blue-500/30 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="flex items-center space-x-2 text-blue-400 font-semibold text-sm">
-                    <span>⚖️ Dictamen Jurídico Automatizado</span>
-                </div>
-                
-                <div id="detalleAuditoria" class="space-y-3 text-xs text-slate-300 bg-slate-950 p-4 rounded-xl border border-slate-800 leading-relaxed">
-                    <!-- IA inyecta el análisis aquí -->
-                </div>
-
-                <!-- OPCIÓN GRATUITA: Derecho de Petición -->
-                <div class="bg-emerald-950/40 border border-emerald-600/40 p-4 rounded-xl space-y-2">
-                    <div class="text-sm font-bold text-emerald-400">Paso 1: Derecho de Petición Inicial (GRATIS)</div>
-                    <p class="text-xs text-slate-300">Genera de forma gratuita el escrito base fundamentado en el Código de Procedimiento Administrativo para requerir pruebas oficiales.</p>
-                    <button onclick="generarDocumentoGratis()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium px-4 py-2.5 rounded-lg transition w-full cursor-pointer">
-                        Generar y Copiar Derecho de Petición Gratuito
-                    </button>
-                </div>
-            </div>
-
-            <!-- Opciones Avanzadas de Pago (Llave Nu @ESH092) -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                <h3 class="text-md font-semibold text-white">Estrategias de Defensa Avanzada (Pago Directo)</h3>
-                <p class="text-xs text-slate-400">Si el dictamen arroja alta viabilidad, adquiere escritos blindados con jurisprudencia de la Corte Constitucional:</p>
-
-                <div class="grid gap-3">
-                    <!-- Nivel 1 -->
-                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between">
-                        <div>
-                            <div class="text-sm font-medium text-white">Nivel 1: Revocatoria Directa / Impugnación</div>
-                            <div class="text-xs text-slate-400">Escrito formal por caducidad o errores técnicos.</div>
-                            <div class="text-emerald-400 font-bold text-sm mt-1">$25.000 COP</div>
-                        </div>
-                        <button onclick="abrirModalPago('Revocatoria Directa', '25.000')" class="bg-slate-800 hover:bg-blue-600 text-white text-xs font-medium px-4 py-2.5 rounded-lg transition cursor-pointer">
-                            Pagar ($25k)
-                        </button>
-                    </div>
-
-                    <!-- Nivel 2 -->
-                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between">
-                        <div>
-                            <div class="text-sm font-medium text-white">Nivel 2: Acción de Tutela por Debido Proceso</div>
-                            <div class="text-xs text-slate-400">Acción constitucional de máxima presión jurídica.</div>
-                            <div class="text-emerald-400 font-bold text-sm mt-1">$60.000 COP</div>
-                        </div>
-                        <button onclick="abrirModalPago('Acción de Tutela', '60.000')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium px-4 py-2.5 rounded-lg transition shadow-md cursor-pointer">
-                            Pagar ($60k)
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- Modal de Pago Integrado con Llave Nu / Bre-B (@ESH092) -->
-    <div id="modalPago" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
-            <h3 class="text-lg font-bold text-white" id="modalTitulo">Pasarela de Pago</h3>
-            <p class="text-xs text-slate-300">Escanee el código QR desde su aplicación bancaria o transfiera a través de Bre-B:</p>
-            
-            <!-- Imagen QR almacenada en el repositorio -->
-            <div class="bg-white p-3 rounded-xl inline-block shadow-inner">
-                <img src="qr-nu.jpg" alt="QR Nu @ESH092" class="w-44 h-44 object-contain mx-auto">
-            </div>
-
-            <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl space-y-1">
-                <span class="text-xs text-slate-400 block">Llave Bre-B / Nu Asociada:</span>
-                <span class="text-sm font-mono font-bold text-purple-400">@ESH092</span>
-                <div class="text-xs text-emerald-400 font-bold pt-1" id="modalMonto">$0 COP</div>
-            </div>
-
-            <div class="space-y-2">
-                <label class="block text-xs text-left text-slate-300">Número de Comprobante o Referencia de Pago:</label>
-                <input type="text" id="refPagoUser" placeholder="Ej: Compra 12345 o Transacción Nequi/Nu" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
-            </div>
-
-            <button onclick="validarYConfirmarPago()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-3 rounded-lg transition cursor-pointer">
-                Confirmar Transferencia y Descargar Documento
-            </button>
-            <button onclick="cerrarModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-lg transition cursor-pointer">
-                Cancelar
-            </button>
-        </div>
-    </div>
-
-    <!-- Script del Motor de IA y Pagos -->
-    <script>
-        function ejecutarAsesoriaIA() {
-            const comp = document.getElementById('comparendo').value;
-            const ced = document.getElementById('cedula').value;
-            const fechaInf = document.getElementById('fechaInfraccion').value;
-            const relato = document.getElementById('relatoHechos').value;
-
-            if(!comp || !ced || !fechaInf || !relato) {
-                alert('Por favor complete todos los campos y redacte el relato de los hechos para que la IA jurídica pueda realizar el análisis.');
-                return;
-            }
-
-            const hoy = new Date();
-            const fechaImp = new Date(fechaInf);
-            const dias = Math.floor((hoy - fechaImp) / (1000 * 60 * 60 * 24));
-
-            let analisisIA = `<strong class="text-slate-100 text-sm block mb-2">Informe de IA Jurídica para Comparendo: ${comp}</strong>`;
-            analisisIA += `• <strong>Cédula Identificada:</strong> ${ced}<br>`;
-            analisisIA += `• <strong>Antigüedad del Comparendo:</strong> ${dias} días transcurridos.<br>`;
-            analisisIA += `• <strong>Análisis del Relato:</strong> "${relato}"<br><br>`;
-
-            if (dias > 3) {
-                analisisIA += `🎯 <strong class="text-emerald-400">Fundamento Clave (Ley 1843 de 2017):</strong> Al haber superado los 3 días hábiles obligatorios para la notificación personal del comparendo físico o electrónico al RUNT, se configura una <strong>violación al debido proceso y caducidad de la acción</strong>. Alta probabilidad de nulidad total.`;
-            } else {
-                analisisIA += `🛡️ <strong class="text-yellow-400">Fundamento Constitucional (Sentencia C-038 de 2020):</strong> Dado que el comparendo es reciente o involucra controversia sobre el responsable en la vía, se argumentará la <strong>prohibición de responsabilidad objetiva</strong>, exigiendo individualización plena del conductor mediante pruebas biométricas o fotográficas claras.`;
-            }
-
-            document.getElementById('detalleAuditoria').innerHTML = analisisIA;
-            document.getElementById('resultado').classList.remove('hidden');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-
-        function generarDocumentoGratis() {
-            alert('¡Derecho de Petición Gratuito Generado!\n\nSe ha estructurado la solicitud formal con base en el Artículo 23 de la Constitución Política y la Ley 1755 de 2015. En un entorno completo, el documento se descarga en formato Word/PDF.');
-        }
-
-        let servicioSeleccionado = '';
-        let montoSeleccionado = '';
-
-        function abrirModalPago(servicio, monto) {
-            servicioSeleccionado = servicio;
-            montoSeleccionado = monto;
-            document.getElementById('modalTitulo').innerText = 'Pago: ' + servicio;
-            document.getElementById('modalMonto').innerText = '$' + monto + ' COP';
-            document.getElementById('refPagoUser').value = '';
-            document.getElementById('modalPago').classList.remove('hidden');
-        }
-
-        function cerrarModal() {
-            document.getElementById('modalPago').classList.add('hidden');
-        }
-
-        function validarYConfirmarPago() {
-            const referencia = document.getElementById('refPagoUser').value;
-            if(!referencia) {
-                alert('Por favor ingrese el número de comprobante o referencia de la transferencia realizada a la llave @ESH092.');
-                return;
-            }
-
-            alert(`¡Pago verificado correctamente para ${servicioSeleccionado}!\n\nReferencia registrada: ${referencia}\nLlave destino: @ESH092\n\nGenerando tu documento jurídico avanzado con jurisprudencia...`);
-            cerrarModal();
-        }
-    </script>
-</body>
-</html>
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1220"><meta name="description" content="Vindicat: orientación jurídica vial en Colombia."><title>Vindicat | Inteligencia jurídica vial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--panel:#111c2f;--line:#263752;--text:#edf3ff;--muted:#a5b4cc;--blue:#6aa8ff;--cyan:#72e1d1;--gold:#f1c879;--radius:22px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% -15%,#1b3b63 0,transparent 42%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}.brand{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;font-size:21px}.mark{height:40px;width:40px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#071322;font-weight:900;font-size:21px}.brand small{display:block;font-family:"DM Sans";font-size:10px;letter-spacing:1.6px;color:var(--muted)}.navlinks{display:flex;gap:25px;color:var(--muted);font-size:14px}.nav-cta,.primary{border:0;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#071322;font-weight:800;padding:12px 17px}.secondary{border:1px solid var(--line);background:#ffffff08;color:var(--text);padding:12px 17px;border-radius:12px;font-weight:700}.hero{padding:78px 0 58px;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}.eyebrow,.tag{display:inline-flex;align-items:center;gap:8px;border:1px solid #6aa8ff55;background:#6aa8ff12;color:#a9d0ff;border-radius:99px;padding:7px 12px;font-size:11px;font-weight:800;letter-spacing:.6px}.dot{height:7px;width:7px;border-radius:50%;background:var(--cyan)}h1,h2,h3{font-family:Manrope,sans-serif;letter-spacing:-1px;line-height:1.12}h1{font-size:clamp(38px,5vw,62px);margin:22px 0}h1 span{background:linear-gradient(100deg,#9dc5ff,var(--cyan));color:transparent;background-clip:text}.lead{color:var(--muted);font-size:18px;max-width:590px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 20px}.micro{font-size:12px;color:var(--muted)}.visual,.feature,.service,.form-panel,.result-panel{border:1px solid var(--line);background:linear-gradient(145deg,#14223a,#0f192a);border-radius:var(--radius);padding:23px}.visual{box-shadow:0 30px 80px #0005}.window-top{display:flex;gap:6px;margin-bottom:22px}.window-top i{width:7px;height:7px;border-radius:50%;background:#57708d}.preview-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}.score{display:flex;gap:14px;align-items:center;margin:17px 0}.shield{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:#72e1d11b;color:var(--cyan);font-size:25px}.score strong{display:block;font-family:Manrope;font-size:19px}.score small{color:var(--muted)}.preview-card{padding:16px;border:1px solid var(--line);border-radius:17px;margin-top:18px;background:#0b1423aa}.preview-card p{color:var(--muted);font-size:13px;margin:6px 0 0}.mini-tag{font-size:10px;color:var(--cyan);font-weight:800;letter-spacing:1px}.section{padding:58px 0}.section-head{max-width:680px;margin-bottom:28px}.section-head h2{font-size:clamp(28px,3.5vw,42px);margin:14px 0}.section-head p,.feature p,.service p{color:var(--muted)}.grid3,.services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature .icon{height:43px;width:43px;display:grid;place-items:center;background:#6aa8ff18;color:var(--blue);border-radius:13px;font-size:21px}.feature h3,.service h3{font-size:18px;margin:18px 0 8px}.feature p,.service p{font-size:14px;margin:0}.workspace{display:grid;grid-template-columns:1fr .9fr;gap:20px;align-items:start}.form-panel h2,.result-panel h2{margin:0 0 8px;font-size:26px}.muted{color:var(--muted);font-size:14px}.field{margin-top:17px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:#dbe7fa}.field input,.field select,.field textarea{width:100%;border:1px solid #30435e;background:#0b1423;color:var(--text);border-radius:11px;padding:12px 13px;outline:none}.field textarea{min-height:100px;resize:vertical}.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checkline{display:flex;gap:10px;align-items:flex-start;margin:17px 0;color:var(--muted);font-size:12px}.checkline input{margin-top:4px}.full{width:100%;margin-top:10px}.status{padding:12px;border-radius:12px;margin-top:14px;font-size:13px;display:none;white-space:pre-wrap}.status.show{display:block}.status.error{background:#ffb4b415;border:1px solid #ffb4b44d;color:#ffd1d1}.status.ok{background:#72e1d111;border:1px solid #72e1d144;color:#c9fff6}.result-panel{min-height:340px;position:sticky;top:16px}.empty-state{padding:40px 10px;text-align:center;color:var(--muted)}.empty-icon{font-size:36px;color:#6aa8ff}.result-content{white-space:pre-wrap;color:#dce7f7;font-size:14px;line-height:1.7}.result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.result-actions button{flex:1;min-width:130px}.price{font-family:Manrope;font-size:28px;font-weight:800;margin:20px 0 6px}.price small{font:500 12px "DM Sans";color:var(--muted)}.service ul{padding-left:18px;color:var(--muted);font-size:13px;min-height:82px}.service button,.service a{display:block;text-align:center;width:100%}.featured{border-color:#6aa8ff88}.notice{border:1px solid #f1c87944;background:#f1c8790b;border-radius:15px;padding:15px;color:#e8d7b4;font-size:12px;margin-top:25px}.faq{border-top:1px solid var(--line);padding:18px 0}.faq summary{font-weight:700;cursor:pointer}.faq p{color:var(--muted);font-size:14px}.footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.small-link{color:#a9d0ff;text-decoration:underline}@media(max-width:800px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding:52px 0 30px;gap:30px}.grid3,.services,.workspace,.row2{grid-template-columns:1fr}.result-panel{position:static;min-height:250px}.section{padding:40px 0}h1{font-size:43px}}
+</style></head><body>
+<header class="wrap nav"><a class="brand" href="#"><span class="mark">V</span><span>VINDICAT<small>INTELIGENCIA JURÍDICA VIAL</small></span></a><nav class="navlinks"><a href="#como-funciona">Cómo funciona</a><a href="#asesoria">Asesoría IA</a><a href="#servicios">Servicios</a><a href="#preguntas">Preguntas</a></nav><a class="nav-cta" href="#asesoria">Analizar mi caso ↗</a></header>
+<main><section class="wrap hero"><div><span class="eyebrow"><i class="dot"></i> ORIENTACIÓN JURÍDICA VIAL EN COLOMBIA</span><h1>Entiende tu caso.<br><span>Defiende tus derechos.</span></h1><p class="lead">Una guía clara para revisar comparendos, fotodetecciones y trámites administrativos. Organiza tus hechos y prepara documentos con apoyo de inteligencia artificial.</p><div class="hero-actions"><a class="primary" href="#asesoria">Iniciar asesoría gratuita →</a><a class="secondary" href="#servicios">Ver servicios</a></div><p class="micro">Orientación informativa · Documentos editables · Sin promesas de resultados garantizados</p></div>
+<div class="visual"><div class="window-top"><i></i><i></i><i></i></div><div class="preview-title">Panel de orientación</div><div class="score"><div class="shield">✓</div><div><strong>Tu caso, paso a paso</strong><small>Revisión de hechos, fechas y documentos</small></div></div><div class="preview-card"><span class="mini-tag">01 · COMPRENDER</span><strong style="display:block;margin-top:8px">Identifica los puntos clave</strong><p>Ordena fechas, notificaciones, entidad responsable y pruebas disponibles.</p></div><div class="preview-card"><span class="mini-tag">02 · PREPARAR</span><strong style="display:block;margin-top:8px">Construye un borrador</strong><p>Genera un documento para revisar antes de presentarlo ante la autoridad.</p></div></div></section>
+<section class="section" id="como-funciona"><div class="wrap"><div class="section-head"><span class="tag">UN PROCESO MÁS CLARO</span><h2>La información correcta es el primer paso.</h2><p>Vindicat te ayuda a organizar tu situación y entender qué conviene verificar antes de actuar.</p></div><div class="grid3"><article class="feature"><div class="icon">⌕</div><h3>1. Analiza los hechos</h3><p>Describe qué pasó, las fechas relevantes y qué documentos tienes. La IA te ayuda a identificar dudas y datos faltantes.</p></article><article class="feature"><div class="icon">⚖</div><h3>2. Revisa opciones</h3><p>Recibe orientación general sobre procedimientos y posibles pasos, distinguiendo hechos confirmados de aspectos por comprobar.</p></article><article class="feature"><div class="icon">↧</div><h3>3. Prepara un documento</h3><p>Genera un borrador editable, revísalo y completa la información antes de presentarlo por canales oficiales.</p></article></div></div></section>
+<section class="section" id="asesoria"><div class="wrap"><div class="section-head"><span class="tag">ASISTENTE DE ORIENTACIÓN</span><h2>Cuéntanos tu situación.</h2><p>Completa lo que sepas. No incluyas contraseñas, datos bancarios ni información sensible innecesaria.</p></div><div class="workspace">
+<form id="caseForm" class="form-panel"><h2>Datos del caso</h2><p class="muted">La precisión de las fechas y los hechos ayuda a una orientación más útil.</p><div class="field"><label for="topic">¿Qué necesitas revisar?</label><select id="topic" required><option value="comparendo">Comparendo o multa de tránsito</option><option value="fotodeteccion">Fotodetección</option><option value="prescripcion">Posible prescripción o cobro</option><option value="embargo">Embargo o cobro coactivo</option><option value="derecho_peticion">Derecho de petición</option><option value="otro">Otro asunto administrativo vial</option></select></div><div class="row2"><div class="field"><label for="entity">Entidad (si la conoces)</label><input id="entity" placeholder="Ej. Secretaría de Tránsito"></div><div class="field"><label for="date">Fecha del hecho o comparendo</label><input id="date" type="date"></div></div><div class="field"><label for="notice">¿Cuándo te notificaron?</label><input id="notice" placeholder="Ej. No sé / 15 de mayo de 2025"></div><div class="field"><label for="facts">Describe qué ocurrió</label><textarea id="facts" required minlength="20" maxlength="8000" placeholder="Cuenta los hechos en orden, qué respuesta recibiste y qué necesitas conseguir."></textarea></div><div class="field"><label for="docs">Documentos o pruebas disponibles (opcional)</label><textarea id="docs" maxlength="2500" placeholder="Ej. comparendo, guía de notificación, respuesta a derecho de petición, consulta SIMIT..."></textarea></div><label class="checkline"><input type="checkbox" id="consent" required><span>Entiendo que la información se enviará al servidor y al proveedor de IA para procesar la consulta. He leído el <a class="small-link" href="#privacidad">aviso de privacidad</a>.</span></label><button id="submitBtn" class="primary full" type="submit">Analizar mi caso con IA ↗</button><div id="status" class="status" role="status"></div></form>
+<section class="result-panel"><span class="tag">RESULTADO</span><h2 style="margin-top:14px">Tu orientación aparecerá aquí</h2><div id="empty" class="empty-state"><div class="empty-icon">✧</div><p>Completa el formulario para recibir un análisis inicial y, si procede, un borrador de derecho de petición.</p><p class="micro">No se presenta ningún documento automáticamente.</p></div><div id="result" hidden><div id="analysis" class="result-content"></div><div class="result-actions"><button id="downloadPetition" class="primary" type="button" disabled>Descargar borrador</button><button id="downloadAnalysis" class="secondary" type="button" disabled>Descargar análisis</button></div><p class="micro">Revisa y completa el documento antes de firmarlo o radicarlo.</p></div></section></div><div class="notice"><strong>Importante:</strong> la IA puede equivocarse y no sustituye una revisión profesional. Los plazos y efectos jurídicos dependen de los hechos, notificaciones, normas y documentos. No se garantiza eliminar multas, reportes o embargos.</div></div></section>
+<section class="section" id="servicios"><div class="wrap"><div class="section-head"><span class="tag">SERVICIOS</span><h2>Elige el apoyo que necesitas.</h2><p>Los precios y servicios se confirmarán antes de habilitar cobros reales.</p></div><div class="services"><article class="service"><span class="tag">INICIO</span><h3>Orientación inicial</h3><p>Organiza tu caso e identifica qué debes comprobar.</p><div class="price">$0 <small>COP</small></div><ul><li>Formulario de caso</li><li>Orientación inicial con IA cuando esté configurada</li><li>Lista de datos por verificar</li></ul><a class="secondary" href="#asesoria">Comenzar gratis</a></article><article class="service featured"><span class="tag">DOCUMENTOS</span><h3>Borrador personalizado</h3><p>Prepara un derecho de petición para revisar.</p><div class="price">Por definir <small>COP</small></div><ul><li>Texto adaptado a los hechos</li><li>Archivo descargable</li><li>Revisión antes de radicar</li></ul><button class="secondary" type="button" onclick="alert('Los pagos aún no están habilitados. No transfieras dinero desde esta página.')">Próximamente</button></article><article class="service"><span class="tag">REVISIÓN</span><h3>Revisión ampliada</h3><p>Organiza evidencias y preguntas para revisión humana.</p><div class="price">Por definir <small>COP</small></div><ul><li>Lista de documentos faltantes</li><li>Identificación de dudas y riesgos</li><li>Sin promesa de resultado</li></ul><button class="secondary" type="button" onclick="alert('Los pagos aún no están habilitados. No transfieras dinero desde esta página.')">Próximamente</button></article></div></div></section>
+<section class="section" id="preguntas"><div class="wrap"><div class="section-head"><span class="tag">PREGUNTAS FRECUENTES</span><h2>Antes de presentar un documento.</h2></div><details class="faq"><summary>¿Garantiza Vindicat que eliminarán mi comparendo?</summary><p>No. El resultado depende de la norma aplicable, los hechos, las pruebas y el procedimiento.</p></details><details class="faq"><summary>¿El borrador se presenta automáticamente?</summary><p>No. Debes revisar su exactitud, completar datos y anexos y presentarlo por el canal oficial correspondiente.</p></details><details class="faq"><summary>¿La IA reemplaza a un abogado?</summary><p>No. Es una herramienta de orientación informativa. Para decisiones importantes, consulta a un profesional habilitado.</p></details><details class="faq"><summary>¿Puedo pagar ahora?</summary><p>No. Los pagos están deshabilitados en esta versión inicial.</p></details></div></section>
+<section class="section" id="privacidad"><div class="wrap"><div class="section-head"><span class="tag">PRIVACIDAD</span><h2>Usa el servicio con cuidado.</h2><p>La consulta se envía al servidor de Vindicat y, al usar IA, al proveedor de IA para procesarla. No ingreses cédulas completas, claves, datos financieros ni información de terceros innecesaria.</p><p>Antes de abrir el servicio al público, el responsable debe publicar una política completa de tratamiento de datos, definir retención y eliminación, canal de consultas y demás obligaciones aplicables en Colombia. Este texto es solo un aviso inicial.</p></div></div></section></main>
+<footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#"><span class="mark">V</span><span>VINDICAT<small>INTELIGENCIA JURÍDICA VIAL</small></span></a><span>© <span id="year"></span> Vindicat · Colombia</span><span>Orientación informativa. Verifica fuentes oficiales.</span></div></footer>
+<script>
+const form=document.getElementById('caseForm'),statusBox=document.getElementById('status'),submitBtn=document.getElementById('submitBtn');let lastData=null;document.getElementById('year').textContent=new Date().getFullYear();
+function setStatus(msg,type){statusBox.textContent=msg;statusBox.className='status show '+type}
+function downloadDoc(filename,title,text){const esc=String(text||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><title>'+title+'</title><style>body{font:12pt Arial;line-height:1.6;margin:2.5cm;color:#172033}h1{font-size:18pt}pre{white-space:pre-wrap;font:12pt Arial}</style></head><body><h1>'+title+'</h1><p>Vindicat · Borrador para revisión</p><hr><pre>'+esc+'</pre><hr><p>Verifica hechos, fechas, normas y anexos antes de firmar o presentar.</p></body></html>';const blob=new Blob([html],{type:'application/msword;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url)}
+form.addEventListener('submit',async e=>{e.preventDefault();if(!document.getElementById('consent').checked){setStatus('Debes aceptar el aviso para continuar.','error');return}const data={topic:document.getElementById('topic').value,entity:document.getElementById('entity').value.trim(),date:document.getElementById('date').value,notice:document.getElementById('notice').value.trim(),facts:document.getElementById('facts').value.trim(),docs:document.getElementById('docs').value.trim()};submitBtn.disabled=true;submitBtn.textContent='Analizando…';setStatus('Procesando tu consulta. No cierres esta página.','ok');try{const r=await fetch('/api/asesoria',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json().catch(()=>({error:'Respuesta no válida del servidor.'}));if(!r.ok)throw new Error(j.error||'No fue posible procesar la consulta.');lastData=j;document.getElementById('empty').hidden=true;document.getElementById('result').hidden=false;document.getElementById('analysis').textContent=j.analysis||'No se recibió análisis.';document.getElementById('downloadAnalysis').disabled=!j.analysis;document.getElementById('downloadPetition').disabled=!j.petition;setStatus('Análisis recibido. Verifica los hechos antes de usar cualquier documento.','ok')}catch(err){setStatus(err.message+' Si la clave OPENAI_API_KEY no está configurada en Vercel, la IA aún no podrá responder.','error')}finally{submitBtn.disabled=false;submitBtn.textContent='Analizar mi caso con IA ↗'}});
+document.getElementById('downloadPetition').addEventListener('click',()=>{if(lastData?.petition)downloadDoc('borrador-derecho-peticion.doc','Borrador de derecho de petición',lastData.petition)});document.getElementById('downloadAnalysis').addEventListener('click',()=>{if(lastData?.analysis)downloadDoc('orientacion-vindicat.doc','Orientación jurídica inicial',lastData.analysis)});
+</script></body></html>
